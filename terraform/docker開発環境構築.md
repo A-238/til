@@ -1,0 +1,11 @@
+# Dockerでの開発環境構築（WSL2(Ubuntu) + Docker Desktop）
+ - AWSコンソール上でterraform操作用IAMユーザーを作成する（コンソールログインはなくていい）
+ - 忘れないようにアクセスキー情報をCSVでダウンロードしておく
+ - AWS CLIをUbuntuへインストールする（[参考サイト](https://mytech-blog.com/ubuntu-aws-cli/)）
+ - `$ aws configure --profile terraform`でterraformユーザーのプロファイルを作成
+ - `$ sudo apt-get update`
+ - `$ sudo apt-get install -y direnv`でdirenvをUbuntuへインストールする（[参考サイト](https://abillyz.com/mamezou/studies/198)）
+ - [Docker-ComposeでTerraformを使う](https://qiita.com/m0559reen/items/1e433ff9e6f6229c3291#%E3%82%82%E3%81%86%E3%81%B2%E3%81%A8%E3%81%93%E3%81%88)を参考にdocker-compose.ymlを用意
+ - 認証情報はdirenvで管理するようにする
+ - `$ docker-compose up -d`でコンテナ作成
+ - planを実行したい場合は`$ docker-compose run --rm terraform plan`
