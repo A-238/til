@@ -1,0 +1,20 @@
+# AWS LightSailを使用してLaravelアプリケーションをデプロイしたい
+ - AWS無料枠などを考慮しなければ多分最安
+ - [参考1](https://dev.classmethod.jp/articles/laravel-study-lightning-talk/)
+ - [参考2](https://qiita.com/chin-zabro/items/fd53648ad7611d613d4f)
+ - 大まかな流れ
+   - Linux/Unix → LAMPを選択（2023/11 現在はLAMP(PHP 8)になっていた）
+   - インスタンスプラン作成、5USDのプランを選びたい（3.5USDの最低プランではcomposer install時にメモリ不足で落ちるらしい）
+   - リソース名入力（後から変更できない）
+   - インスタンス作成
+   - SSHで接続（接続情報が管理画面上にある（秘密鍵もダウンロードできる））
+   - GitでGithubからデプロイしたいブランチを取得するか、scpコマンドなどでファイルをアップロード（/opt/bitnami/apache2/htdocsへ配置）
+   - `composer install`
+   - ドキュメントルートの変更
+   - WEBサーバーの再起動
+   - storageディレクトリの権限変更（`chmod 777 -R storage/`）
+   - mysqlコマンドでDBに接続してデータベース作成（passwordは /home/bitnami/bitnami_credentials）
+   - .envファイル編集（DB接続情報）
+   - `php artisan key:generate`
+   - `php artisan migrate`
+   - インスタンスのIPをブラウザで叩く
